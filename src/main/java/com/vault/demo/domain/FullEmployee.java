@@ -3,67 +3,56 @@ package com.vault.demo.domain;
 
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
 
 @Entity
 @Table( name = "EMPLOYEES" )
-public class FullEmployee
-// extends Employee
+public class FullEmployee implements Comparable<FullEmployee>
 {
   
-  // INI
   @Id
   @Column( name = "EMPLOYEE_ID" )
   @GeneratedValue( strategy = GenerationType.IDENTITY )
-  public Integer    id;
+  public Integer          id;
   
   @Column( name = "FIRST_NAME" )
-  public String     firstName;
+  public String           firstName;
   
   @Column( name = "LAST_NAME", nullable = false )
-  public String     lastName;
+  public String           lastName;
   
   @Column( nullable = false )
-  public String     email;
+  public String           email;
   
   @Column( name = "PHONE_NUMERIC" )
-  public String     phoneNumeric;
+  public String           phoneNumeric;
   
   @Column( name = "HIRE_DATE", nullable = false )
-  public Date       hireDate;
+  public Date             hireDate;
   
-  public Float      salary;
+  public Float            salary;
   
   @Column( name = "COMMISSION_PCT" )
-  public Float      commissionPct;
+  public Float            commissionPct;
   
-  // END
   @ManyToOne
   @JoinColumn( name = "JOB_ID", referencedColumnName = "JOB_ID" )
-  public Job        job;
+  public Job              job;
   
   @ManyToOne
   @JoinColumn( name = "MANAGER_ID", referencedColumnName = "EMPLOYEE_ID" )
-  public Employee   manager;
+  public Employee         manager;
   
   @ManyToOne
   @JoinColumn( name = "DEPARTMENT_ID", referencedColumnName = "DEPARTMENT_ID" )
-  public Department department;
+  public Department       department;
   
-  // public FullEmployee( Employee e )
-  // {
-  // this.id = e.getId();
-  // // this.departmentId = e.getDepartmentId();
-  // this.commissionPct = e.getCommissionPct();
-  // this.firstName = e.getFirstName();
-  // this.lastName = e.getLastName();
-  // this.email = e.getEmail();
-  // this.hireDate = e.getHireDate();
-  // // this.jobId = e.getJobId();
-  // // this.managerId = e.getManagerId();
-  // }
+  @OneToMany
+  @JoinColumn( name = "EMPLOYEE_ID", referencedColumnName = "EMPLOYEE_ID" )
+  public List<JobHistory> jobHistory;
   
   public Integer getId()
   {
@@ -173,6 +162,22 @@ public class FullEmployee
   public void setDepartment( Department department )
   {
     this.department = department;
+  }
+  
+  public List<JobHistory> getJobHistory()
+  {
+    return jobHistory;
+  }
+  
+  public void setJobHistory( List<JobHistory> jobHistory )
+  {
+    this.jobHistory = jobHistory;
+  }
+  
+  @Override
+  public int compareTo( FullEmployee o )
+  {
+    return this.getHireDate().compareTo(o.getHireDate());
   }
   
 }

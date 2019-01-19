@@ -8,9 +8,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.vault.demo.domain.Department;
 import com.vault.demo.domain.Employee;
-import com.vault.demo.domain.FullEmployee;
 
 
 @Repository

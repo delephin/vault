@@ -23,9 +23,6 @@ public class Country
   @Column( name = "COUNTRY_NAME" )
   public String name;
   
-  // @Column( name = "REGION_ID" )
-  // public Integer regionId;
-  
   @ManyToOne( cascade = CascadeType.ALL )
   @JoinColumn( name = "REGION_ID" )
   public Region region;
@@ -59,16 +56,5 @@ public class Country
   {
     this.region = region;
   }
-  
-  // public Integer getRegionId()
-  // {
-  // return regionId;
-  // }
-  //
-  // public void setRegionId( Integer regionId )
-  // {
-  // this.regionId = regionId;
-  // }
-  //
   
 }
