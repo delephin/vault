@@ -2,8 +2,9 @@
 package com.vault.demo.repository;
 
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,20 +20,20 @@ public interface FullEmployeeRepository extends JpaRepository<FullEmployee, Inte
 {
   
   @Query( "select e from FullEmployee e where e.job = :job and e.manager = :manager and e.lastName = :lastName" )
-  Page<FullEmployee> findEmployeesByJobIdAndLastNameAndManagerId( Pageable paramPageable, @Param( "job" ) Job job, @Param( "manager" ) Employee manager, @Param( "lastName" ) String lastName );
+  List<FullEmployee> findEmployeesByJobIdAndLastNameAndManagerId( Sort paramSort, @Param( "job" ) Job job, @Param( "manager" ) Employee manager, @Param( "lastName" ) String lastName );
   
   @Query( "select e from FullEmployee e where e.job = :job and e.manager = :manager " )
-  Page<FullEmployee> findEmployeesByJobIdAndManagerId( Pageable paramPageable, @Param( "job" ) Job job, @Param( "manager" ) Employee manager );
+  List<FullEmployee> findEmployeesByJobIdAndManagerId( Sort paramSort, @Param( "job" ) Job job, @Param( "manager" ) Employee manager );
   
   @Query( "select e from FullEmployee e where e.job = :job and e.lastName = :lastName" )
-  Page<FullEmployee> findEmployeesByJobIdAndLastName( Pageable paramPageable, @Param( "job" ) Job job, @Param( "lastName" ) String lastName );
+  List<FullEmployee> findEmployeesByJobIdAndLastName( Sort paramSort, @Param( "job" ) Job job, @Param( "lastName" ) String lastName );
   
   @Query( "select e from FullEmployee e where e.manager = :manager and e.lastName = :lastName" )
-  Page<FullEmployee> findEmployeesByLastNameAndManagerId( Pageable paramPageable, @Param( "manager" ) Employee manager, @Param( "lastName" ) String lastName );
+  List<FullEmployee> findEmployeesByLastNameAndManagerId( Sort paramSort, @Param( "manager" ) Employee manager, @Param( "lastName" ) String lastName );
   
-  Page<FullEmployee> findByManagerId( Pageable paramPageable, Integer managerId );
+  List<FullEmployee> findByManagerId( Sort paramSort, Integer managerId );
   
-  Page<FullEmployee> findByJobId( Pageable paramPageable, String jobId );
+  List<FullEmployee> findByJobId( Sort paramSort, String jobId );
   
-  Page<FullEmployee> findByLastName( Pageable paramPageable, String lastName );
+  List<FullEmployee> findByLastName( Sort paramSort, String lastName );
 }

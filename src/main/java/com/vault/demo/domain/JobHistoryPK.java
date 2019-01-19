@@ -12,8 +12,9 @@ import javax.persistence.Embeddable;
 public class JobHistoryPK implements Serializable
 {
   
-  protected Integer employeeId;
-  protected Date    startDate;
+  private static final long serialVersionUID = 3175516482083339520L;
+  protected Integer         employeeId;
+  protected Date            startDate;
   
   public JobHistoryPK()
   {
